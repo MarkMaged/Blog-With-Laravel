@@ -29,7 +29,7 @@
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="/Test/admin/index.php">
+                <a class="nav-link active" href="{{route('index')}}">
                     <span data-feather="home"></span>
                     Dashboard <span class="sr-only">(current)</span>
                 </a>
@@ -41,7 +41,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('blog.admin')}}">
+                <a class="nav-link" href="{{route('blog.index')}}">
                     <span data-feather="shopping-cart"></span>
                     Blogs
                 </a>

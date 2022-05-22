@@ -8,11 +8,36 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    public function blogs()
+    public function index()
     {
 
         $blogs = Blog::all();
-        return view('admin.blogs.admin_blogs', ['blogs' => $blogs]);
+        return view('admin.blogs.index', ['blogs' => $blogs]);
+    }
+    public function create()
+    {
+        return view('admin.blogs.create');
+    }
+    public function store(Request $request)
+    {
+
+        $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+            'image' => 'nullable|image',
+        ]);
+
+        $data = $request->all();
+
+
+        if (isset($request->image)) {
+            $image = $request->file('image')->store('blog');
+            $data['image'] = $image;
+        }
+
+        $blog = Blog::create($data);
+
+        return redirect(route('blog.index'))->with('success', 'Blog inserted with id :' . " " . $blog->id);
     }
     public function show($id)
     {
@@ -22,11 +47,12 @@ class BlogController extends Controller
         // dd($blogshow);
         return view('admin.blogs.show', ['blog_show' => $blogshow]);
     }
-    public function delete($id)
+    public function destroy($id)
     {
         $delete = Blog::findOrfail($id);
 
         $delete->delete();
-        return redirect(route('blog.admin'));
+
+        return redirect(route('blog.index'))->with('success', 'Blog' . ' ' . $id . ' ' . 'deleted');
     }
 }

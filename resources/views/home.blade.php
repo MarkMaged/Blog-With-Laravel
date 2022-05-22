@@ -1,7 +1,11 @@
+
 @extends('layout.main')
-@section('title')
+
+
+ @section('title')
  Home Page
 @endsection
+
 @section('content')
 
 <!DOCTYPE html>

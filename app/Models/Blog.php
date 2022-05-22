@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model
 {
-    use HasFactory;
+    // use HasFactory;
+
+    public  $timestamps = false;
+    public $fillable =['title', 'content', 'image'];
 }
